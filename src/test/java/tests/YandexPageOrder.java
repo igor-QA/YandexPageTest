@@ -12,20 +12,18 @@ public class YandexPageOrder {
     @BeforeAll
     static void setUp() {
         Configuration.startMaximized = true;
-        }
+    }
     @Test
     void searchForPhilipsAutoCoffee() {
         open("https://market.yandex.ru/");
         $("#pokupki").click();
         $("#pokupki").$(byText("Покупка на Маркете")).click();
         $("#header-search").val("philips").pressEnter();
-        $("#pokupki").parent().shouldHave(text("Покупки"));
+        $("#pokupki").parent().shouldHave(text("Покупка"));
         $("[type=search]").shouldHave(value("philips"));
         $$("[data-auto=intent-link]").findBy(text("Бытовая техника")).click();
         $$("[data-auto=intent-link]").findBy(text("Мелкая техника для кухни")).click();
-        $$("[data-auto=intent-link]").findBy(text("Кухонные приборы для приготовления напитков")).click();
-        $$("[data-auto=intent-link]").findBy(text("Кофеварки и кофемашины")).click();
-        $("[data-apiary-widget-name='@marketplace/SearchTitleAndInfo']").shouldHave(text("Кофеварки и кофемашины"));
-        }
+        $$("[data-auto=name]").findBy(text("Кофеварки и кофемашины")).click();
+        $("[data-auto=breadcrumb-item-6]").shouldHave(text("Кофеварки и кофемашины Philips"));
     }
-
+}
